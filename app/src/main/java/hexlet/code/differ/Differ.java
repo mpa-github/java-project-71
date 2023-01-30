@@ -2,6 +2,8 @@ package hexlet.code.differ;
 
 import hexlet.code.parser.AbstractParser;
 import hexlet.code.parser.JsonParser;
+import hexlet.code.printer.AbstractPrinter;
+import hexlet.code.printer.StylishPrinter;
 import hexlet.code.reader.Reader;
 
 import java.io.IOException;
@@ -12,25 +14,20 @@ public class Differ {
     private final static String PLUS_PREFIX = "  + ";
     private final static String MINUS_PREFIX = "  - ";
     private final static String NEUTRAL_PREFIX = "    ";
-    private static final String NEW_LINE = System.lineSeparator();
-    private static final String SPLITTER = ": ";
     private final static Reader READER = new Reader();
     private final static AbstractParser PARSER = new JsonParser();
+    private final static AbstractPrinter PRINTER = new StylishPrinter();
 
     public static String generate(String pathString1, String pathString2) throws IOException {
         String json1 = READER.readFile(pathString1);
         String json2 = READER.readFile(pathString2);
         Map<String, String> map1 = PARSER.parse(json1);
         Map<String, String> map2 = PARSER.parse(json2);
-        Map<String, String> differMap = getDifferMap(map1, map2);
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("{").append(NEW_LINE);
-        differMap.forEach((key, value) -> stringBuilder.append(key).append(SPLITTER).append(value).append(NEW_LINE));
-        stringBuilder.append("}");
-        return stringBuilder.toString();
+        Map<String, String> differMap = buildDiffMap(map1, map2);
+        return PRINTER.getStringForPrint(differMap);
     }
 
-    private static Map<String, String> getDifferMap(Map<String, String> map1, Map<String, String> map2) {
+    private static Map<String, String> buildDiffMap(Map<String, String> map1, Map<String, String> map2) {
         Map<String, String> differMap = new LinkedHashMap<>();
         Set<String> keys = new HashSet<>();
         keys.addAll(map1.keySet());
