@@ -21,7 +21,10 @@ application {
 }
 
 jacocoTestReport {
-    dependsOn test // tests are required to run before generating the report
+    //dependsOn test // tests are required to run before generating the report
+    reports {
+        xml.required = true
+    }
 }
 
 repositories {
@@ -37,5 +40,5 @@ dependencies {
 
 test {
     useJUnitPlatform()
-    finalizedBy jacocoTestReport // report is always generated after tests run
+    //finalizedBy jacocoTestReport // report is always generated after tests run
 }
