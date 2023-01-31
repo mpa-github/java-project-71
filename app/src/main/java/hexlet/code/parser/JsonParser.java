@@ -14,7 +14,7 @@ public class JsonParser extends AbstractParser {
         // TODO (?) Check "" AND null ?
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, String> map = new HashMap<>();
-        map = objectMapper.readValue(jsonString, new TypeReference<>() {});
+        map = objectMapper.readValue(jsonString, new TypeReference<Map<String, String>>() { });
         return map;
     }
 }

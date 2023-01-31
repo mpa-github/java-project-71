@@ -13,13 +13,13 @@ class JsonParserTest {
     private static final AbstractParser JSON_PARSER = new JsonParser();
 
     @Test
-    void parse_shouldReturnCorrectMap_whenInputJsonString() throws JsonProcessingException {
-        String json = "{" + NEXT_LINE +
-                      "  \"host\": \"hexlet.io\"," + NEXT_LINE +
-                      "  \"timeout\": 50," + NEXT_LINE +
-                      "  \"proxy\": \"123.234.53.22\"," + NEXT_LINE +
-                      "  \"follow\": false" + NEXT_LINE +
-                      "}";
+    void parseShouldReturnCorrectMapWhenInputJsonString() throws JsonProcessingException {
+        String json = "{" + NEXT_LINE
+                    + "  \"host\": \"hexlet.io\"," + NEXT_LINE
+                    + "  \"timeout\": 50," + NEXT_LINE
+                    + "  \"proxy\": \"123.234.53.22\"," + NEXT_LINE
+                    + "  \"follow\": false" + NEXT_LINE
+                    + "}";
         Map<String, String> actual = JSON_PARSER.parse(json);
         Map<String, String> expected = Map.of("host", "hexlet.io",
                                               "timeout", "50",

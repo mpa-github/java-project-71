@@ -20,27 +20,27 @@ class ReaderTest {
     private static final Reader READER = new Reader();
 
     @Test
-    void readFile_shouldReturnCorrectString_whenReadJsonFile() throws IOException {
+    void readFileShouldReturnCorrectStringWhenReadJsonFile() throws IOException {
         String actual1 = READER.readFile(STR_PATH_1);
-        String expected1 = "{" + NEW_LINE +
-                           "  \"host\": \"hexlet.io\"," + NEW_LINE +
-                           "  \"timeout\": 50," + NEW_LINE +
-                           "  \"proxy\": \"123.234.53.22\"," + NEW_LINE +
-                           "  \"follow\": false" + NEW_LINE +
-                           "}";
+        String expected1 = "{" + NEW_LINE
+                         + "  \"host\": \"hexlet.io\"," + NEW_LINE
+                         + "  \"timeout\": 50," + NEW_LINE
+                         + "  \"proxy\": \"123.234.53.22\"," + NEW_LINE
+                         + "  \"follow\": false" + NEW_LINE
+                         + "}";
         assertEquals(expected1, actual1);
 
         String actual2 = READER.readFile(STR_PATH_2);
-        String expected2 = "{" + NEW_LINE +
-                           "  \"timeout\": 20," + NEW_LINE +
-                           "  \"verbose\": true," + NEW_LINE +
-                           "  \"host\": \"hexlet.io\"" + NEW_LINE +
-                           "}";
+        String expected2 = "{" + NEW_LINE
+                         + "  \"timeout\": 20," + NEW_LINE
+                         + "  \"verbose\": true," + NEW_LINE
+                         + "  \"host\": \"hexlet.io\"" + NEW_LINE
+                         + "}";
         assertEquals(expected2, actual2);
     }
 
     @Test
-    void readFile_shouldReturnEmptyString_whenInputIsEmptyStringOrNull() throws IOException {
+    void readFileShouldReturnEmptyStringWhenInputIsEmptyStringOrNull() throws IOException {
         String actual1 = READER.readFile(EMPTY_STRING);
         assertEquals(EMPTY_STRING, actual1);
 
@@ -49,7 +49,7 @@ class ReaderTest {
     }
 
     @Test
-    void readFile_shouldThrowFileNotFoundException_whenInputNotAFilePath() {
+    void readFileShouldThrowFileNotFoundExceptionWhenInputNotAFilePath() {
         assertThrows(FileNotFoundException.class, () -> READER.readFile(NOT_A_FILE_PATH));
     }
 }

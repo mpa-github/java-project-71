@@ -7,24 +7,27 @@ import hexlet.code.printer.StylishPrinter;
 import hexlet.code.reader.Reader;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class Differ {
 
-    private final static String PLUS_PREFIX = "  + ";
-    private final static String MINUS_PREFIX = "  - ";
-    private final static String NEUTRAL_PREFIX = "    ";
-    private final static Reader READER = new Reader();
-    private final static AbstractParser PARSER = new JsonParser();
-    private final static AbstractPrinter PRINTER = new StylishPrinter();
+    private static final String PLUS_PREFIX = "+ ";
+    private static final String MINUS_PREFIX = "- ";
+    private static final String NEUTRAL_PREFIX = "  ";
+    private static final Reader READER = new Reader();
+    private static final AbstractParser PARSER = new JsonParser();
+    private static final AbstractPrinter PRINTER = new StylishPrinter();
 
     public static String generate(String pathString1, String pathString2) throws IOException {
         String json1 = READER.readFile(pathString1);
         String json2 = READER.readFile(pathString2);
         Map<String, String> map1 = PARSER.parse(json1);
         Map<String, String> map2 = PARSER.parse(json2);
-        Map<String, String> differMap = buildDiffMap(map1, map2);
-        return PRINTER.getStringForPrint(differMap);
+        Map<String, String> diffMap = buildDiffMap(map1, map2);
+        return PRINTER.getStringView(diffMap);
     }
 
     private static Map<String, String> buildDiffMap(Map<String, String> map1, Map<String, String> map2) {
