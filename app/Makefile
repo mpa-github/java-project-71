@@ -18,3 +18,6 @@ test: # Run tests
 
 lint: # Check code style
 	./gradlew checkstyleMain checkstyleTest
+
+test-report: # Check code coverage
+	./gradlew jacocoTestReport
