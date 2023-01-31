@@ -1,0 +1,11 @@
+# Overview
+
+name: github-actions 🚀
+
+on: [push] # action
+jobs:
+  build: # job name
+    runs-on: ubuntu-latest
+    steps:
+      - run: make -C app test
+      - run: make -C app lint
