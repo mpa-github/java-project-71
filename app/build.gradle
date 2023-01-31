@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
+    id 'jacoco'
 }
 
 group 'hexlet.code'
@@ -19,6 +20,10 @@ application {
     mainClass = 'hexlet.code.App'
 }
 
+jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
+}
+
 repositories {
     mavenCentral()
 }
@@ -32,4 +37,5 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport // report is always generated after tests run
 }
