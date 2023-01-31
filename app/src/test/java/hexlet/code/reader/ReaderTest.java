@@ -13,9 +13,9 @@ class ReaderTest {
     private static final String STR_PATH_1 = "src/test/resources/json1.json";
     private static final String STR_PATH_2 = "src/test/resources/json2.json";
     private static final String NOT_A_FILE_PATH = "src/test/resources/file.file";
-    private static final String NEW_LINE = "\r\n"; // (?) In WSL tests failed with -> System.lineSeparator()
+    //private static final String NEW_LINE = "\r\n"; // (?) In WSL tests failed with -> System.lineSeparator()
     //private static final String NEW_LINE = System.getProperty("line.separator");
-    //private static final String NEW_LINE = System.lineSeparator();
+    private static final String NEW_LINE = System.lineSeparator();
     private static final String EMPTY_STRING = "";
     private static final Reader READER = new Reader();
 
