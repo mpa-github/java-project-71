@@ -2,6 +2,8 @@
 FILEPATH1=src/test/resources/json1.json
 FILEPATH2=src/test/resources/json2.json
 
+.PHONY: build
+
 run-dist: build test lint run # Build, check and run app
 
 run: # Run app
@@ -16,5 +18,3 @@ test: # Run tests
 
 lint: # Check code style
 	./gradlew checkstyleMain checkstyleTest
-
-	.PHONY: build
