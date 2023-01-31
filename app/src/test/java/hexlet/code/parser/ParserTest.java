@@ -1,15 +1,12 @@
 package hexlet.code.parser;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-//@JsonPropertyOrder({ "host", "timeout", "proxy", "follow" })
 class ParserTest {
 
     private static final String JSON_EXTENSION = "json";
