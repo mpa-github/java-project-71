@@ -7,13 +7,19 @@ jobs:
   build: # job name
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3 # clone our repository to the github runner
+      - uses: actions/checkout@v3 # clone our repository to the GitHub runner
       - uses: actions/setup-java@v3 # install Java 17
         with:
           distribution: 'zulu'
           java-version: '17'
-      - run: java --version
-      - run: chmod +x app/gradlew
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
+        with:
+          arguments: build
+      # - run: java --version
+      # - run: chmod +x app/gradlew
+      - run: make -C app build
       - run: make -C app test
       - run: make -C app lint
-      
