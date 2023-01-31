@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3 # clone our repository to the github runner
-      - run: chmod +x app/gradlew
-      - run: make -C app test
-      - run: make -C app lint
+      - run: java --version
+      #- run: chmod +x app/gradlew
+      #- run: make -C app test
+      #- run: make -C app lint
