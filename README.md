@@ -7,8 +7,8 @@ This project contains... Test Coverage
 |---------------|--------|
 | Hexlet        |[![Actions Status](https://github.com/mpa-github/java-project-71/workflows/hexlet-check/badge.svg)](https://github.com/mpa-github/java-project-71/actions)|
 | Build (CI)    |[![github-actions](https://github.com/mpa-github/java-project-71/actions/workflows/github-actions.yml/badge.svg)](https://github.com/mpa-github/java-project-71/actions/workflows/github-actions.yml)|
-| Code climate  |${{ secrets.CODECLIMATE_LINTER_SECRET }}|
-| Test Coverage |${{ secrets.CODECLIMATE_TESTS_SECRET }}|
+| Code climate  |[![Maintainability](https://api.codeclimate.com/v1/badges/eaf03a784479d1b55f25/maintainability)](https://codeclimate.com/github/mpa-github/java-project-71/maintainability)|
+| Test Coverage |[![Test Coverage](https://api.codeclimate.com/v1/badges/eaf03a784479d1b55f25/test_coverage)](https://codeclimate.com/github/mpa-github/java-project-71/test_coverage)|
 
 -----
 
