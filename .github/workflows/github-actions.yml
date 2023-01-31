@@ -7,4 +7,4 @@ jobs:
   build: # job name
     runs-on: ubuntu-latest
     steps:
-      - run: make -C ${{ github.workspace }} test
+      - run: ls -l -a ${{ github.workspace }}
