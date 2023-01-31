@@ -1,6 +1,6 @@
 # Overview
 
-name: github-actions 🚀
+name: github-actions
 
 on: [push] # action
 jobs:
