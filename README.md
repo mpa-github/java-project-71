@@ -1,6 +1,6 @@
 # Overview
 
-This project contains... Test Coverage
+This project contains...
 
 ### Project badges status:
 | Badge         | Status |

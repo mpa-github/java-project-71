@@ -9,7 +9,7 @@ public class StylishPrinter extends AbstractPrinter {
     private static final String INDENT = "  ";
 
     @Override
-    public String getStringView(Map<String, String> map) {
+    public String getStringView(Map<String, Object> map) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("{")
                      .append(NEW_LINE);

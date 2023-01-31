@@ -6,5 +6,5 @@ import java.util.Map;
 
 public abstract class AbstractParser {
 
-    public abstract Map<String, String> parse(String string) throws JsonProcessingException;
+    public abstract Map<String, Object> parse(String string, String extension) throws JsonProcessingException;
 }

@@ -4,5 +4,5 @@ import java.util.Map;
 
 public abstract class AbstractPrinter {
 
-    public abstract String getStringView(Map<String, String> map);
+    public abstract String getStringView(Map<String, Object> map);
 }
