@@ -16,11 +16,10 @@ class ReaderTest {
     //private static final String NEW_LINE = "\r\n"; // (?) In WSL tests failed with -> System.lineSeparator()
     private static final String NEW_LINE = System.lineSeparator();
     private static final String EMPTY_STRING = "";
-    private static final Reader READER = new Reader();
 
     @Test
     void readFileShouldReturnCorrectStringWhenReadJsonFile() throws IOException {
-        String actual1 = READER.readFile(STR_PATH_1);
+        String actual1 = Reader.readFile(STR_PATH_1);
         // TODO There is diff ('\r\n' | '\n') when read windows files via WSL (Linux)
         String expected1 = "{" + NEW_LINE
                          + "  \"host\": \"hexlet.io\"," + NEW_LINE
@@ -30,7 +29,7 @@ class ReaderTest {
                          + "}";
         assertEquals(expected1, actual1);
 
-        String actual2 = READER.readFile(STR_PATH_2);
+        String actual2 = Reader.readFile(STR_PATH_2);
         String expected2 = "{" + NEW_LINE
                          + "  \"timeout\": 20," + NEW_LINE
                          + "  \"verbose\": true," + NEW_LINE
@@ -41,15 +40,15 @@ class ReaderTest {
 
     @Test
     void readFileShouldReturnEmptyStringWhenInputIsEmptyStringOrNull() throws IOException {
-        String actual1 = READER.readFile(EMPTY_STRING);
+        String actual1 = Reader.readFile(EMPTY_STRING);
         assertEquals(EMPTY_STRING, actual1);
 
-        String actual2 = READER.readFile(null);
+        String actual2 = Reader.readFile(null);
         assertEquals(EMPTY_STRING, actual2);
     }
 
     @Test
     void readFileShouldThrowFileNotFoundExceptionWhenInputNotAFilePath() {
-        assertThrows(FileNotFoundException.class, () -> READER.readFile(NOT_A_FILE_PATH));
+        assertThrows(FileNotFoundException.class, () -> Reader.readFile(NOT_A_FILE_PATH));
     }
 }

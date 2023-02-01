@@ -12,7 +12,6 @@ class ParserTest {
     private static final String JSON_EXTENSION = "json";
     private static final String YAML_EXTENSION = "yml";
     private static final String NEW_LINE = System.lineSeparator();
-    private static final AbstractParser PARSER = new Parser();
 
     @Test
     void parseShouldReturnCorrectMapWhenInputJsonString() throws JsonProcessingException {
@@ -22,7 +21,7 @@ class ParserTest {
                            + "  \"proxy\": \"123.234.53.22\"," + NEW_LINE
                            + "  \"follow\": false" + NEW_LINE
                            + "}";
-        Map<String, Object> actual = PARSER.parse(jsonContent, JSON_EXTENSION);
+        Map<String, Object> actual = Parser.parse(jsonContent, JSON_EXTENSION);
         Map<String, Object> expected = Map.of("host", "hexlet.io",
                                               "timeout", 50,
                                               "proxy", "123.234.53.22",
@@ -37,7 +36,7 @@ class ParserTest {
                            + "timeout: 50" + NEW_LINE
                            + "proxy: 123.234.53.22" + NEW_LINE
                            + "follow: false";
-        Map<String, Object> actual = PARSER.parse(yamlContent, YAML_EXTENSION);
+        Map<String, Object> actual = Parser.parse(yamlContent, YAML_EXTENSION);
         Map<String, Object> expected = Map.of("host", "hexlet.io",
                                               "timeout", 50,
                                               "proxy", "123.234.53.22",

@@ -14,11 +14,13 @@ class DifferTest {
     private static final String STR_JSON_PATH_4 = "src/test/resources/json4.json";
     private static final String STR_YAML_PATH_1 = "src/test/resources/yaml1.yml";
     private static final String STR_YAML_PATH_2 = "src/test/resources/yaml2.yml";
+    private static final String STYLISH_FORMAT = "stylish";
+    private static final String PLAIN_FORMAT = "plain";
     private static final String NEW_LINE = System.lineSeparator();
 
     @Test
     void generateShouldReturnCorrectDiffStringWhenInputCorrectJsonStringPaths() throws IOException {
-        String actual1 = Differ.generate(STR_JSON_PATH_1, STR_JSON_PATH_2);
+        String actual1 = Differ.generate(STR_JSON_PATH_1, STR_JSON_PATH_2, STYLISH_FORMAT);
         String expected1 = "{" + NEW_LINE
                          + "  - follow: false" + NEW_LINE
                          + "    host: hexlet.io" + NEW_LINE
@@ -29,7 +31,7 @@ class DifferTest {
                          + "}";
         assertEquals(expected1, actual1);
 
-        String actual2 = Differ.generate(STR_JSON_PATH_3, STR_JSON_PATH_4);
+        String actual2 = Differ.generate(STR_JSON_PATH_3, STR_JSON_PATH_4, STYLISH_FORMAT);
         String expected2 = "{" + NEW_LINE
                          + "    chars1: [a, b, c]" + NEW_LINE
                          + "  - chars2: [d, e, f]" + NEW_LINE
@@ -60,7 +62,7 @@ class DifferTest {
 
     @Test
     void generateShouldReturnCorrectDiffStringWhenInputCorrectYamlStringPaths() throws IOException {
-        String actual1 = Differ.generate(STR_YAML_PATH_1, STR_YAML_PATH_2);
+        String actual1 = Differ.generate(STR_YAML_PATH_1, STR_YAML_PATH_2, STYLISH_FORMAT);
         String expected1 = "{" + NEW_LINE
                          + "    chars1: [a, b, c]" + NEW_LINE
                          + "  - chars2: [d, e, f]" + NEW_LINE

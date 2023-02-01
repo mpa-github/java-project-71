@@ -11,7 +11,7 @@ public class Reader {
 
     private static final String EMPTY_STRING = "";
 
-    public String readFile(String pathString) throws IOException {
+    public static String readFile(String pathString) throws IOException {
         if (pathString == null || pathString.equals(EMPTY_STRING)) {
             return EMPTY_STRING;
         }
