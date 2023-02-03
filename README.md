@@ -6,6 +6,7 @@ Features:
 * Support for different input formats: yaml and json
 * Report generation in the form of plain text, stylish and json
 
+[Watch application demo.](https://asciinema.org/a/QMvN1brLBz4OZR3uRCnvIryrl) <br>
 
 ### Project badges status:
 | Badge         | Status |
@@ -15,16 +16,15 @@ Features:
 | Linter        |[![Maintainability](https://api.codeclimate.com/v1/badges/eaf03a784479d1b55f25/maintainability)](https://codeclimate.com/github/mpa-github/java-project-71/maintainability)|
 | Code Coverage |[![Test Coverage](https://api.codeclimate.com/v1/badges/eaf03a784479d1b55f25/test_coverage)](https://codeclimate.com/github/mpa-github/java-project-71/test_coverage)|
 
------
-
-## Demo
+## Unix
+### Setup
 
 ```sh
-Demo 
+make -C app build
 ```
 
-## Start
+### Start
 
 ```sh
-command
+make -C app run
 ```
