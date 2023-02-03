@@ -17,6 +17,7 @@ public class Differ {
     private static final String STATUS_DELETED = "deleted";
     private static final String STATUS_UPDATED = "updated";
     private static final String STATUS_UNMODIFIED = "unmodified";
+    private static final String DEFAULT_FORMAT = "stylish";
 
     public static String generate(String pathString1, String pathString2, String format) {
         String extension1 = FileUtils.getFileExtension(pathString1);
@@ -30,6 +31,10 @@ public class Differ {
         Map<String, Object> map2 = Parser.parse(content2, extension2);
         List<Map<String, Object>> diffList = buildDiffList(map1, map2);
         return Formatter.getView(diffList, format);
+    }
+
+    public static String generate(String pathString1, String pathString2) {
+        return generate(pathString1, pathString2, DEFAULT_FORMAT);
     }
 
     private static List<Map<String, Object>> buildDiffList(Map<String, Object> map1, Map<String, Object> map2) {
