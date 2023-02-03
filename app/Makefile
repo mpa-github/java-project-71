@@ -1,19 +1,18 @@
 # Makefile
-FILEPATH1=src/test/resources/json1.json
-FILEPATH2=src/test/resources/json2.json
-FILEPATH3=src/test/resources/json3.json
-FILEPATH4=src/test/resources/json4.json
-FILEPATH5=src/test/resources/yaml1.yml
-FILEPATH6=src/test/resources/yaml2.yml
+FILEPATH1=src/test/resources/json/json1.json
+FILEPATH2=src/test/resources/json/json2.json
+FILEPATH5=src/test/resources/yaml/yaml1.yml
+FILEPATH6=src/test/resources/yaml/yaml2.yml
 FORMAT1?=stylish
 FORMAT2?=plain
+FORMAT3?=json
 
 .PHONY: build
 
 run-dist: build test lint test-report run # Build, check and run app
 
 run: # Run app
-	./build/install/app/bin/app -f $(FORMAT1) $(FILEPATH3) $(FILEPATH4)
+	./build/install/app/bin/app -f $(FORMAT3) $(FILEPATH3) $(FILEPATH4)
 
 build: # Build app
 	./gradlew clean

@@ -1,6 +1,11 @@
 # Overview
 
-This project contains...
+This project is an application that perceives the difference between two data structures. <br>
+
+Features:
+* Support for different input formats: yaml and json
+* Report generation in the form of plain text, stylish and json
+
 
 ### Project badges status:
 | Badge         | Status |
@@ -15,7 +20,7 @@ This project contains...
 ## Demo
 
 ```sh
-Demo
+Demo 
 ```
 
 ## Start
