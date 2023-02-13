@@ -1,8 +1,8 @@
 package hexlet.code;
 
 import hexlet.code.formatter.Formatter;
-import hexlet.code.utils.FileUtils;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -13,28 +13,33 @@ import java.util.Set;
 
 public class Differ {
 
-    private static final String STATUS_ADDED = "added";
-    private static final String STATUS_DELETED = "deleted";
-    private static final String STATUS_UPDATED = "updated";
-    private static final String STATUS_UNMODIFIED = "unmodified";
+    //private static final String STATUS_ADDED = "added";
+    //private static final String STATUS_DELETED = "deleted";
+    //private static final String STATUS_UPDATED = "updated";
+    //private static final String STATUS_UNMODIFIED = "unmodified";
     private static final String DEFAULT_FORMAT = "stylish";
 
-    public static String generate(String pathString1, String pathString2, String format) {
-        String extension1 = FileUtils.getFileExtension(pathString1);
-        String extension2 = FileUtils.getFileExtension(pathString2);
+    public static String generate(String pathString1, String pathString2, String format)
+            throws IOException, UnsupportedOperationException {
+        String extension1 = FileReader.getFileExtension(pathString1);
+        String extension2 = FileReader.getFileExtension(pathString2);
         if (!extension1.equals(extension2)) {
             throw new UnsupportedOperationException("Unable to match files with different extensions!");
         }
-        String content1 = FileReader.readFile(pathString1);
-        String content2 = FileReader.readFile(pathString2);
-        Map<String, Object> map1 = Parser.parse(content1, extension1);
-        Map<String, Object> map2 = Parser.parse(content2, extension2);
+        Map<String, Object> map1 = getFileData(pathString1, extension1);
+        Map<String, Object> map2 = getFileData(pathString2, extension2);
         List<Map<String, Object>> diffList = buildDiffList(map1, map2);
-        return Formatter.getView(diffList, format);
+        return Formatter.format(diffList, format);
     }
 
-    public static String generate(String pathString1, String pathString2) {
+    public static String generate(String pathString1, String pathString2) throws IOException {
         return generate(pathString1, pathString2, DEFAULT_FORMAT);
+    }
+
+    // TODO (?) Should this method be in Differ.class?
+    private static Map<String, Object> getFileData(String pathString, String extension) throws IOException {
+        String content = FileReader.read(pathString);
+        return Parser.parse(content, extension);
     }
 
     private static List<Map<String, Object>> buildDiffList(Map<String, Object> map1, Map<String, Object> map2) {
@@ -55,23 +60,23 @@ public class Differ {
             Object newValue = map2.get(key);
             if (Objects.equals(oldValue, newValue)) {
                 resultMap.put("key", key);
-                resultMap.put("status", STATUS_UNMODIFIED);
+                resultMap.put("status", ParamStatus.UNMODIFIED.name);
                 resultMap.put("value", oldValue);
             } else {
                 resultMap.put("key", key);
-                resultMap.put("status", STATUS_UPDATED);
+                resultMap.put("status", ParamStatus.UPDATED.name);
                 resultMap.put("oldValue", oldValue);
                 resultMap.put("newValue", newValue);
             }
         } else if (map1.containsKey(key) && !map2.containsKey(key)) {
             Object oldValue = map1.get(key);
             resultMap.put("key", key);
-            resultMap.put("status", STATUS_DELETED);
+            resultMap.put("status", ParamStatus.DELETED.name);
             resultMap.put("value", oldValue);
         } else if (!map1.containsKey(key) && map2.containsKey(key)) {
             Object newValue = map2.get(key);
             resultMap.put("key", key);
-            resultMap.put("status", STATUS_ADDED);
+            resultMap.put("status", ParamStatus.ADDED.name);
             resultMap.put("value", newValue);
         }
         return resultMap;

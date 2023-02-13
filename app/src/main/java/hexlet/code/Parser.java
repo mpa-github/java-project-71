@@ -13,7 +13,7 @@ public class Parser {
     private static final String JSON_EXTENSION = "json";
     private static final String YAML_EXTENSION = "yml";
 
-    public static Map<String, Object> parse(String string, String extension) {
+    public static Map<String, Object> parse(String string, String extension) throws JsonProcessingException {
         Map<String, Object> map = new HashMap<>();
         map = switch (extension) {
             case JSON_EXTENSION -> parseJson(string);
@@ -23,23 +23,13 @@ public class Parser {
         return map;
     }
 
-    private static Map<String, Object> parseJson(String jsonString) {
+    private static Map<String, Object> parseJson(String jsonString) throws JsonProcessingException {
         ObjectMapper jsonMapper = new ObjectMapper();
-        return getStringObjectMap(jsonString, jsonMapper);
+        return jsonMapper.readValue(jsonString, new TypeReference<Map<String, Object>>() { });
     }
 
-    private static Map<String, Object> parseYaml(String yamlString) {
+    private static Map<String, Object> parseYaml(String yamlString) throws JsonProcessingException {
         ObjectMapper yamlMapper = new YAMLMapper();
-        return getStringObjectMap(yamlString, yamlMapper);
-    }
-
-    private static Map<String, Object> getStringObjectMap(String string, ObjectMapper mapper) {
-        Map<String, Object> map = new HashMap<>();
-        try {
-            map = mapper.readValue(string, new TypeReference<Map<String, Object>>() { });
-        } catch (JsonProcessingException ex) {
-            throw new RuntimeException(ex.getMessage());
-        }
-        return map;
+        return yamlMapper.readValue(yamlString, new TypeReference<Map<String, Object>>() { });
     }
 }

@@ -10,6 +10,6 @@ class FileReaderTest {
 
     @Test
     void readFileShouldThrowRuntimeExceptionWhenInputNotAFilePath() {
-        assertThrows(RuntimeException.class, () -> FileReader.readFile(NOT_A_FILE_PATH));
+        assertThrows(RuntimeException.class, () -> FileReader.read(NOT_A_FILE_PATH));
     }
 }

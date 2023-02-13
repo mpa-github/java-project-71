@@ -11,17 +11,11 @@ import java.util.Map;
 
 public class JsonFormatter {
 
-    public static String getJsonView(List<Map<String, Object>> mapList) {
+    public static String format(List<Map<String, Object>> mapList) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
-        String resultView;
-        try {
-            mapper.enable(SerializationFeature.INDENT_OUTPUT);
-            DefaultPrettyPrinter prettyPrinter = new DefaultPrettyPrinter();
-            prettyPrinter.indentArraysWith(DefaultIndenter.SYSTEM_LINEFEED_INSTANCE);
-            resultView = mapper.writer(prettyPrinter).writeValueAsString(mapList);
-        } catch (JsonProcessingException ex) {
-            throw new RuntimeException(ex.getMessage());
-        }
-        return resultView;
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        DefaultPrettyPrinter prettyPrinter = new DefaultPrettyPrinter();
+        prettyPrinter.indentArraysWith(DefaultIndenter.SYSTEM_LINEFEED_INSTANCE);
+        return mapper.writer(prettyPrinter).writeValueAsString(mapList);
     }
 }

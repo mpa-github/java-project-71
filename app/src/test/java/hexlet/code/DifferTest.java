@@ -3,6 +3,8 @@ package hexlet.code;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -22,7 +24,7 @@ class DifferTest {
     private String expectedJsonView;
 
     @BeforeEach
-    void initView1() {
+    void init1() {
         expectedStylishView = "{" + NEW_LINE
                 + "    chars1: [a, b, c]" + NEW_LINE
                 + "  - chars2: [d, e, f]" + NEW_LINE
@@ -65,7 +67,7 @@ class DifferTest {
     }
 
     @BeforeEach
-    void initView2() {
+    void init2() {
         expectedJsonView = "[" + NEW_LINE
                 + "  {" + NEW_LINE
                 + "    \"key\" : \"chars1\"," + NEW_LINE
@@ -191,7 +193,7 @@ class DifferTest {
     }
 
     @Test
-    void generateShouldReturnCorrectDiffViewWhenInputCorrectJsonFilePaths() {
+    void generateShouldReturnCorrectDiffViewWhenInputCorrectJsonFilePaths() throws IOException {
         String actualStylishView = Differ.generate(STR_JSON_PATH_1, STR_JSON_PATH_2, STYLISH_FORMAT);
         String actualPlainView = Differ.generate(STR_JSON_PATH_1, STR_JSON_PATH_2, PLAIN_FORMAT);
         String actualJsonView = Differ.generate(STR_JSON_PATH_1, STR_JSON_PATH_2, JSON_FORMAT);
@@ -201,7 +203,7 @@ class DifferTest {
     }
 
     @Test
-    void generateShouldReturnCorrectDiffViewWhenInputCorrectYamlFilePaths() {
+    void generateShouldReturnCorrectDiffViewWhenInputCorrectYamlFilePaths() throws IOException {
         String actualStylishView = Differ.generate(STR_YAML_PATH_1, STR_YAML_PATH_2, STYLISH_FORMAT);
         String actualPlainView = Differ.generate(STR_YAML_PATH_1, STR_YAML_PATH_2, PLAIN_FORMAT);
         String actualJsonView = Differ.generate(STR_YAML_PATH_1, STR_YAML_PATH_2, JSON_FORMAT);
