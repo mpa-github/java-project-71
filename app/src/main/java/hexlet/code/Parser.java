@@ -1,4 +1,4 @@
-package hexlet.code;
+/*package hexlet.code;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -32,4 +32,4 @@ public class Parser {
         ObjectMapper yamlMapper = new YAMLMapper();
         return yamlMapper.readValue(yamlString, new TypeReference<Map<String, Object>>() { });
     }
-}
+}*/

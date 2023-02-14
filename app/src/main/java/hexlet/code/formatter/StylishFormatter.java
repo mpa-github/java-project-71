@@ -5,19 +5,16 @@ import hexlet.code.ParamStatus;
 import java.util.List;
 import java.util.Map;
 
-public class StylishFormatter {
+public class StylishFormatter implements IFormatter {
 
     private static final String NEW_LINE = System.lineSeparator();
-    //private static final String STATUS_ADDED = "added";
-    //private static final String STATUS_DELETED = "deleted";
-    //private static final String STATUS_UPDATED = "updated";
-    //private static final String STATUS_UNMODIFIED = "unmodified";
     private static final String PLUS_PREFIX = "  + ";
     private static final String MINUS_PREFIX = "  - ";
     private static final String NEUTRAL_PREFIX = "    ";
     private static final String SPLITTER = ": ";
 
-    public static String format(List<Map<String, Object>> mapList) {
+    @Override
+    public /*static*/ String format(List<Map<String, Object>> mapList) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("{").append(NEW_LINE);
         mapList.forEach(map -> stringBuilder.append(buildStylishLine(map)));
@@ -29,9 +26,7 @@ public class StylishFormatter {
         StringBuilder sb = new StringBuilder();
         Object key = map.get("key");
         String keyStatus = (String) map.get("status");
-        // TODO With Enums here we have 1 more string processing (.toUpperCase) per key in a map.
-        // TODO Change switch to if-else ?
-        ParamStatus paramStatus = ParamStatus.valueOf(keyStatus.toUpperCase());
+        ParamStatus paramStatus = ParamStatus.getByName(keyStatus);
         switch (paramStatus) {
             case ADDED -> {
                 Object value = map.get("value");

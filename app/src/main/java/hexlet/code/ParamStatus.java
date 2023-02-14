@@ -7,22 +7,17 @@ public enum ParamStatus {
     UPDATED("updated"),
     UNMODIFIED("unmodified");
 
-    public final String name;
+    private final String name;
 
-    ParamStatus(String name) {
-        this.name = name;
+    ParamStatus(String statusName) {
+        this.name = statusName;
     }
 
-    public static ParamStatus getParamStatus(String name) {
-        return ParamStatus.valueOf(name);
+    public String getName() {
+        return name;
     }
 
-    /*public static ParamStatus getByName(String name) {
-        for (ParamStatus status : ParamStatus.values()) {
-            if (status.name.equalsIgnoreCase(name)) {
-                return status;
-            }
-        }
-        return null;
-    }*/
+    public static ParamStatus getByName(String name) {
+        return ParamStatus.valueOf(name.toUpperCase());
+    }
 }

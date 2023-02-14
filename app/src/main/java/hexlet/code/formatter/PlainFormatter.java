@@ -8,28 +8,31 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
 
-public class PlainFormatter {
+public class PlainFormatter implements IFormatter {
 
     private static final String NEW_LINE = System.lineSeparator();
-    //private static final String STATUS_ADDED = "added";
-    //private static final String STATUS_DELETED = "deleted";
-    //private static final String STATUS_UPDATED = "updated";
 
-    public static String format(List<Map<String, Object>> mapList) {
+    @Override
+    public /*static*/ String format(List<Map<String, Object>> mapList) {
         StringJoiner stringJoiner = new StringJoiner(NEW_LINE);
         for (Map<String, Object> map : mapList) {
             Object key = map.get("key");
-            Object keyStatus = map.get("status");
-            if (keyStatus.equals(ParamStatus.ADDED.name)) {
-                Object value = map.get("value");
-                stringJoiner.add("Property '%s' was added with value: %s".formatted(key, stringify(value)));
-            } else if (keyStatus.equals(ParamStatus.DELETED.name)) {
-                stringJoiner.add("Property '%s' was removed".formatted(key));
-            } else if (keyStatus.equals(ParamStatus.UPDATED.name)) {
-                Object oldValue = map.get("oldValue");
-                Object newValue = map.get("newValue");
-                stringJoiner.add("Property '%s' was updated. From %s to %s".formatted(key, stringify(oldValue),
-                                                                                           stringify(newValue)));
+            String keyStatus = (String) map.get("status");
+            ParamStatus paramStatus = ParamStatus.getByName(keyStatus);
+            switch (paramStatus) {
+                case ADDED -> {
+                    Object value = map.get("value");
+                    stringJoiner.add("Property '%s' was added with value: %s".formatted(key, stringify(value)));
+                }
+                case UPDATED -> {
+                    Object oldValue = map.get("oldValue");
+                    Object newValue = map.get("newValue");
+                    stringJoiner.add("Property '%s' was updated. From %s to %s".formatted(key, stringify(oldValue),
+                                                                                               stringify(newValue)));
+                }
+                case DELETED -> stringJoiner.add("Property '%s' was removed".formatted(key));
+                case UNMODIFIED -> { }
+                default -> throw new UnsupportedOperationException("Plain format: invalid parameter status!");
             }
             // TODO (?) Return a message if unmodified ?
         }

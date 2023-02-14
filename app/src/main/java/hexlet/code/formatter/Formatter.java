@@ -1,4 +1,4 @@
-package hexlet.code.formatter;
+/*package hexlet.code.formatter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -20,4 +20,4 @@ public class Formatter {
             default -> throw new RuntimeException("Format to '%s' is not supported!".formatted(format));
         };
     }
-}
+}*/
