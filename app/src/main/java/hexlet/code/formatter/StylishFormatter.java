@@ -5,7 +5,7 @@ import hexlet.code.ParamStatus;
 import java.util.List;
 import java.util.Map;
 
-public class StylishFormatter implements Formatter {
+public final class StylishFormatter implements Formatter {
 
     private static final String NEW_LINE = System.lineSeparator();
     private static final String PLUS_PREFIX = "  + ";

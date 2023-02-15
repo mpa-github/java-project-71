@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
 
-public class PlainFormatter implements Formatter {
+public final class PlainFormatter implements Formatter {
 
     private static final String NEW_LINE = System.lineSeparator();
 
