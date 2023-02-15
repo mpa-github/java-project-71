@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
 
-public class PlainFormatter implements IFormatter {
+public class PlainFormatter implements Formatter {
 
     private static final String NEW_LINE = System.lineSeparator();
 
     @Override
-    public /*static*/ String format(List<Map<String, Object>> mapList) {
+    public String format(List<Map<String, Object>> mapList) {
         StringJoiner stringJoiner = new StringJoiner(NEW_LINE);
         for (Map<String, Object> map : mapList) {
             Object key = map.get("key");

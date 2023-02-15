@@ -6,8 +6,8 @@ public class FormatterFactory {
     private static final String PLAIN_NAME = "plain";
     private static final String JSON_NAME = "json";
 
-    public IFormatter getFormatter(String format) {
-        IFormatter formatter;
+    public static Formatter getFormatter(String format) {
+        Formatter formatter;
         formatter = switch (format) {
             case STYLISH_NAME -> new StylishFormatter();
             case PLAIN_NAME -> new PlainFormatter();

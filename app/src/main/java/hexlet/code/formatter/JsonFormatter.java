@@ -9,10 +9,10 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import java.util.List;
 import java.util.Map;
 
-public class JsonFormatter implements IFormatter {
+public class JsonFormatter implements Formatter {
 
     @Override
-    public /*static*/ String format(List<Map<String, Object>> mapList) throws JsonProcessingException {
+    public String format(List<Map<String, Object>> mapList) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
         DefaultPrettyPrinter prettyPrinter = new DefaultPrettyPrinter();

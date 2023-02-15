@@ -5,7 +5,7 @@ import hexlet.code.ParamStatus;
 import java.util.List;
 import java.util.Map;
 
-public class StylishFormatter implements IFormatter {
+public class StylishFormatter implements Formatter {
 
     private static final String NEW_LINE = System.lineSeparator();
     private static final String PLUS_PREFIX = "  + ";
@@ -14,7 +14,7 @@ public class StylishFormatter implements IFormatter {
     private static final String SPLITTER = ": ";
 
     @Override
-    public /*static*/ String format(List<Map<String, Object>> mapList) {
+    public String format(List<Map<String, Object>> mapList) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("{").append(NEW_LINE);
         mapList.forEach(map -> stringBuilder.append(buildStylishLine(map)));

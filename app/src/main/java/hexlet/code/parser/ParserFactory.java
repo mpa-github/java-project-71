@@ -5,7 +5,7 @@ public class ParserFactory {
     private static final String JSON_NAME = "json";
     private static final String YAML_NAME = "yml";
 
-    public Parser getParser(String extension) {
+    public static Parser getParser(String extension) {
         Parser parser;
         parser = switch (extension) {
             case JSON_NAME -> new JsonParser();

@@ -2,14 +2,19 @@ package hexlet.code;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class DifferTest {
 
@@ -38,24 +43,26 @@ class DifferTest {
         expectedJsonString = Files.readString(jsonFilePath);
     }
 
-    @Test
-    void testDiffsWhenInputJsonFiles() throws IOException {
-        String actualStylishString = Differ.generate(STR_JSON_PATH_1, STR_JSON_PATH_2, STYLISH_FORMAT);
-        String actualPlainString = Differ.generate(STR_JSON_PATH_1, STR_JSON_PATH_2, PLAIN_FORMAT);
-        String actualJsonString = Differ.generate(STR_JSON_PATH_1, STR_JSON_PATH_2, JSON_FORMAT);
-        assertEquals(expectedStylishString, actualStylishString);
-        assertEquals(expectedPlainString, actualPlainString);
-        assertEquals(expectedJsonString, actualJsonString);
+    @ParameterizedTest
+    @MethodSource("getExpectedStringsForFormats")
+    void testDiffsWhenInputJsonFiles(String expected, String format) throws IOException {
+        String actual = Differ.generate(STR_JSON_PATH_1, STR_JSON_PATH_2, format);
+        assertEquals(expected, actual);
     }
 
-    @Test
-    void testDiffsWhenInputYamlFiles() throws IOException {
-        String actualStylishString = Differ.generate(STR_YAML_PATH_1, STR_YAML_PATH_2, STYLISH_FORMAT);
-        String actualPlainString = Differ.generate(STR_YAML_PATH_1, STR_YAML_PATH_2, PLAIN_FORMAT);
-        String actualJsonString = Differ.generate(STR_YAML_PATH_1, STR_YAML_PATH_2, JSON_FORMAT);
-        assertEquals(expectedStylishString, actualStylishString);
-        assertEquals(expectedPlainString, actualPlainString);
-        assertEquals(expectedJsonString, actualJsonString);
+    @ParameterizedTest
+    @MethodSource("getExpectedStringsForFormats")
+    void testDiffsWhenInputYamlFiles(String expected, String format) throws IOException {
+        String actual = Differ.generate(STR_YAML_PATH_1, STR_YAML_PATH_2, format);
+        assertEquals(expected, actual);
+    }
+
+    private static Stream<Arguments> getExpectedStringsForFormats() {
+        return Stream.of(
+                arguments(expectedStylishString, STYLISH_FORMAT),
+                arguments(expectedPlainString, PLAIN_FORMAT),
+                arguments(expectedJsonString, JSON_FORMAT)
+        );
     }
 
     @Test

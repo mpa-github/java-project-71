@@ -1,8 +1,7 @@
 package hexlet.code;
 
-//import hexlet.code.formatter.Formatter;
 import hexlet.code.formatter.FormatterFactory;
-import hexlet.code.formatter.IFormatter;
+import hexlet.code.formatter.Formatter;
 import hexlet.code.parser.Parser;
 import hexlet.code.parser.ParserFactory;
 
@@ -29,23 +28,18 @@ public class Differ {
         Map<String, Object> map1 = getFileData(pathString1, extension1);
         Map<String, Object> map2 = getFileData(pathString2, extension2);
         List<Map<String, Object>> diffList = buildDiffList(map1, map2);
-        FormatterFactory formatterFactory = new FormatterFactory();
-        IFormatter formatter = formatterFactory.getFormatter(format);
+        Formatter formatter = FormatterFactory.getFormatter(format);
         return formatter.format(diffList);
-        //return Formatter.format(diffList, format);
     }
 
     public static String generate(String pathString1, String pathString2) throws IOException {
         return generate(pathString1, pathString2, DEFAULT_FORMAT);
     }
 
-    // TODO (?) Should this method be in Differ.class?
     private static Map<String, Object> getFileData(String pathString, String extension) throws IOException {
         String content = FileReader.read(pathString);
-        ParserFactory parserFactory = new ParserFactory();
-        Parser parser = parserFactory.getParser(extension);
+        Parser parser = ParserFactory.getParser(extension);
         return parser.parse(content);
-        //return hexlet.code.Parser.parse(content, extension);
     }
 
     private static List<Map<String, Object>> buildDiffList(Map<String, Object> map1, Map<String, Object> map2) {
