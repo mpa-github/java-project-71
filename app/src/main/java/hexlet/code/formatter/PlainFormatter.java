@@ -11,6 +11,7 @@ import java.util.StringJoiner;
 public final class PlainFormatter implements Formatter {
 
     private static final String NEW_LINE = System.lineSeparator();
+    private static final String COMPLEX_VALUE_STRING = "[complex value]";
 
     @Override
     public String format(List<Map<String, Object>> mapList) {
@@ -34,7 +35,6 @@ public final class PlainFormatter implements Formatter {
                 case UNMODIFIED -> { }
                 default -> throw new UnsupportedOperationException("Plain format: invalid parameter status!");
             }
-            // TODO (?) Return a message if unmodified ?
         }
         return stringJoiner.toString();
     }
@@ -44,7 +44,7 @@ public final class PlainFormatter implements Formatter {
             return "'%s'".formatted(object);
         }
         if (object instanceof ArrayList<?> || object instanceof LinkedHashMap<?, ?>) {
-            return "[complex value]";
+            return COMPLEX_VALUE_STRING;
         }
         return object;
     }
